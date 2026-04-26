@@ -24,7 +24,7 @@
                 <i class="fa-solid fa-camel text-3xl text-amber-400"></i>
                 <span class="text-3xl font-semibold tracking-tighter">OsamaAi</span>
             </div>
-            <div class="text-emerald-400 text-sm font-medium">Hyper Intelligent • 175B Parameters • Local</div>
+            <div class="text-emerald-400 text-sm font-medium">Connected to Groq • Llama 3.1 70B</div>
         </div>
     </nav>
 
@@ -36,7 +36,7 @@
                         <div class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center text-2xl">🐪</div>
                         <div>
                             <div class="font-semibold text-xl">OsamaAi</div>
-                            <div class="text-xs text-emerald-400">Hyper Intelligent Assistant</div>
+                            <div class="text-xs text-emerald-400">Hyper Intelligent • Groq API</div>
                         </div>
                     </div>
 
@@ -57,18 +57,38 @@
     </div>
 
     <script>
-        function sendMessage() {
+        const GROQ_API_KEY = "YOUR_GROQ_API_KEY_HERE";   // ←←← CHANGE THIS
+
+        async function sendMessage() {
             const input = document.getElementById('user-input');
             const msg = input.value.trim();
             if (!msg) return;
-            
+
             addMessage(msg, true);
             input.value = '';
+            addMessage("Thinking...", false);
 
-            setTimeout(() => {
-                const reply = getHyperResponse(msg);
-                addMessage(reply, false);
-            }, 600);
+            try {
+                const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${GROQ_API_KEY}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "llama-3.1-70b-versatile",
+                        messages: [{ role: "user", content: msg }],
+                        temperature: 0.7,
+                        max_tokens: 1024
+                    })
+                });
+
+                const data = await response.json();
+                const reply = data.choices[0].message.content;
+                replaceLastMessage(reply);
+            } catch (err) {
+                replaceLastMessage("Error connecting to AI. Please check your API key.");
+            }
         }
 
         function addMessage(text, isUser) {
@@ -80,48 +100,17 @@
             chat.scrollTop = chat.scrollHeight;
         }
 
-        // Much smarter AI
-        function getHyperResponse(prompt) {
-            const lower = prompt.toLowerCase();
-
-            if (lower.includes("hello") || lower.includes("hi")) {
-                return "Hello! Great to see you. What can I help you with today?";
-            }
-
-            if (lower.includes("who are you") || lower.includes("what are you")) {
-                return "I am OsamaAi — a hyper-intelligent AI assistant with advanced reasoning. I'm here to help you with anything.";
-            }
-
-            if (lower.includes("what can you do") || lower.includes("capabilities")) {
-                return "I can write code, create recipes, business plans, stories, analyze problems, give advice, generate ideas, debug issues, and much more. Just ask me anything — I'm ready.";
-            }
-
-            if (lower.includes("cookie") || lower.includes("recipe")) {
-                return `Here's a great **Chocolate Chip Cookie Recipe**:<br><br>
-                        <strong>Ingredients:</strong><br>
-                        • 2¼ cups flour<br>
-                        • 1 tsp baking soda<br>
-                        • 1 cup butter<br>
-                        • ¾ cup sugar + ¾ cup brown sugar<br>
-                        • 2 eggs<br>
-                        • 2 tsp vanilla<br>
-                        • 2 cups chocolate chips<br><br>
-                        Bake at 375°F for 9-11 minutes.<br><br>Want any modifications?`;
-            }
-
-            if (lower.includes("tuna") || lower.includes("can")) {
-                return "Step 1: Find a can opener.<br>Step 2: Place it on the rim and twist.<br>Step 3: Enjoy your tuna.<br><br>Need a tuna salad recipe?";
-            }
-
-            // Default high-quality response
-            return `Got it. I've processed "<strong>${prompt}</strong>".<br><br>What would you like me to do with this? Expand on it, give examples, or take a different direction?`;
+        function replaceLastMessage(newText) {
+            const chat = document.getElementById('chat-window');
+            if (chat.lastChild) chat.lastChild.remove();
+            addMessage(newText, false);
         }
 
         window.onload = () => {
             document.getElementById('chat-window').innerHTML = `
                 <div class="max-w-2xl">
                     <p class="text-4xl font-semibold tracking-tight">Hello, I'm OsamaAi.</p>
-                    <p class="text-neutral-400 mt-4">A truly hyper-intelligent assistant. Ask me anything.</p>
+                    <p class="text-neutral-400 mt-4">A hyper-intelligent assistant powered by Llama 3.1 70B.</p>
                 </div>`;
         };
 
