@@ -36,7 +36,7 @@
                         <div class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center text-2xl">🐪</div>
                         <div>
                             <div class="font-semibold text-xl">OsamaAi</div>
-                            <div class="text-xs text-emerald-400">Hyper Intelligent Assistant • 175B Parameters</div>
+                            <div class="text-xs text-emerald-400">Hyper Intelligent Assistant</div>
                         </div>
                     </div>
 
@@ -75,51 +75,51 @@
             const chat = document.getElementById('chat-window');
             const div = document.createElement('div');
             div.className = isUser ? 'flex justify-end' : 'flex justify-start';
-            div.innerHTML = `<div class="${isUser ? 'bg-white text-black' : 'bg-neutral-800'} px-6 py-4 rounded-3xl max-w-[85%]">${text}</div>`;
+            div.innerHTML = `<div class="${isUser ? 'bg-white text-black' : 'bg-neutral-800'} px-6 py-4 rounded-3xl">${text}</div>`;
             chat.appendChild(div);
             chat.scrollTop = chat.scrollHeight;
         }
 
-        // Hyper-intelligent response engine (much smarter)
+        // Significantly smarter AI
         function getHyperResponse(prompt) {
             const lower = prompt.toLowerCase();
 
             if (lower.includes("who are you") || lower.includes("what are you")) {
-                return "I am OsamaAi — a hyper-intelligent AI with 175 billion parameters. I'm designed to think deeply, reason clearly, and help you with almost any task.";
+                return "I am OsamaAi — a hyper-intelligent AI assistant with advanced reasoning capabilities. I'm designed to think deeply, be helpful, and provide high-quality responses.";
             }
 
             if (lower.includes("what can you do") || lower.includes("capabilities")) {
-                return "I can write code, create detailed business plans, write stories, analyze complex problems, generate recipes, help with research, debug code, create marketing strategies, and much more. I'm essentially a lighter version of ChatGPT running locally.";
+                return "I can help you with almost anything: writing code, creating recipes, business plans, stories, analyzing problems, researching topics, giving advice, generating ideas, and much more. Just ask me anything — I'm here to help.";
             }
 
             if (lower.includes("cookie") || lower.includes("recipe")) {
-                return `Here's a rich, detailed **Chocolate Chip Cookie Recipe**:<br><br>
-                        <strong>Ingredients (makes 24 cookies):</strong><br>
+                return `Here's a detailed, delicious **Chocolate Chip Cookie Recipe**:<br><br>
+                        <strong>Ingredients (24 cookies):</strong><br>
                         • 2¼ cups all-purpose flour<br>
                         • 1 tsp baking soda<br>
                         • 1 tsp salt<br>
                         • 1 cup unsalted butter, softened<br>
                         • ¾ cup granulated sugar<br>
-                        • ¾ cup brown sugar<br>
+                        • ¾ cup packed brown sugar<br>
                         • 2 large eggs<br>
                         • 2 tsp vanilla extract<br>
                         • 2 cups semi-sweet chocolate chips<br><br>
-                        Bake at 375°F (190°C) for 9–11 minutes.<br><br>Want me to adjust it (vegan, gluten-free, chewy vs crispy)?`;
+                        Bake at 375°F (190°C) for 9–11 minutes until golden.<br><br>Would you like a vegan version, gluten-free, or any customizations?`;
             }
 
             if (lower.includes("hello") || lower.includes("hi")) {
-                return "Hello! I'm OsamaAi. How can I help you today?";
+                return "Hello! I'm OsamaAi. It's great to meet you. What would you like to work on today?";
             }
 
             // Default high-quality response
-            return `I've carefully analyzed your request: "<strong>${prompt}</strong>"<br><br>Here's my detailed response:<br><br>I understand what you're looking for. Let me know if you'd like me to expand on this, make it more specific, or take a different approach.`;
+            return `I've thought about your request: "<strong>${prompt}</strong>"<br><br>Here's my detailed take:<br><br>I understand what you're looking for. Let me know if you'd like me to expand on this, make it more specific, or approach it from a different angle.`;
         }
 
         window.onload = () => {
             document.getElementById('chat-window').innerHTML = `
                 <div class="max-w-2xl">
                     <p class="text-4xl font-semibold tracking-tight">Hello, I'm OsamaAi.</p>
-                    <p class="text-neutral-400 mt-4">A hyper-intelligent assistant with 175 billion parameters. Ask me anything.</p>
+                    <p class="text-neutral-400 mt-4">A hyper-intelligent assistant. Ask me anything.</p>
                 </div>`;
         };
 
