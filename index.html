@@ -3,142 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com;">
     <title>NovaMind • Front Desk Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap');
-        body { 
-            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background: #f5f5f7;
+        
+        body {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f7;
         }
-        .chat-bubble { max-width: 75%; word-break: break-word; }
+        
+        .nav {
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(30px);
+        }
+        
+        .hero {
+            background: linear-gradient(180deg, #1a1a1c 0%, #0a0a0a 100%);
+        }
+        
+        .section {
+            scroll-margin-top: 80px;
+        }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <div class="max-w-screen-2xl mx-auto flex h-screen">
-        
-        <!-- Sidebar -->
-        <div class="w-80 bg-white border-r border-neutral-200 p-8 flex flex-col">
-            <div class="flex items-center gap-3 mb-10">
-                <div class="w-9 h-9 bg-black rounded-2xl flex items-center justify-center text-white font-bold">N</div>
-                <div>
-                    <div class="font-semibold text-2xl tracking-tight">NovaMind</div>
-                    <div class="text-xs text-emerald-600 font-medium">Llama 3.2 • Secure</div>
+    <!-- Top Navigation - Apple Style -->
+    <nav class="nav fixed w-full z-50 border-b border-neutral-800">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="#" class="text-2xl font-semibold tracking-tight">NovaMind</a>
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#features" class="hover:text-white transition-colors">Features</a>
+                    <a href="#frontdesk" class="hover:text-white transition-colors">Front Desk</a>
+                    <a href="#ai" class="hover:text-white transition-colors">AI Assistant</a>
+                    <a href="#demo" class="hover:text-white transition-colors">Try Now</a>
                 </div>
             </div>
-            
-            <h1 class="text-3xl font-semibold mb-2">Front Desk Assistant</h1>
-            <p class="text-neutral-500 mb-8">Your intelligent hotel operations helper</p>
-            
-            <div onclick="newChat()" class="flex items-center gap-3 p-4 hover:bg-neutral-100 rounded-3xl cursor-pointer transition-colors">
-                <i class="fa-solid fa-plus text-lg"></i>
-                <span class="font-medium">New Conversation</span>
+            <div class="flex items-center gap-6">
+                <span class="text-xs bg-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-full">Llama 3.2 • Local</span>
+                <div class="w-8 h-8 bg-neutral-700 rounded-full flex items-center justify-center text-sm">IV</div>
             </div>
         </div>
+    </nav>
 
-        <!-- Main Chat Area -->
-        <div class="flex-1 flex flex-col">
-            <!-- Header -->
-            <div class="h-16 border-b bg-white flex items-center px-8">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-concierge-bell text-2xl text-emerald-600"></i>
-                    <div class="font-medium text-xl">Front Desk Assistant</div>
-                </div>
-                <div class="ml-auto text-sm text-emerald-600 flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <span>Local & Secure</span>
-                </div>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero pt-32 pb-24">
+        <div class="max-w-screen-2xl mx-auto px-8 text-center">
+            <h1 class="text-7xl md:text-8xl font-semibold tracking-tighter leading-none mb-6">
+                Intelligence for the<br>Front Desk.
+            </h1>
+            <p class="text-2xl text-neutral-400 max-w-2xl mx-auto">
+                Your AI assistant that handles guest communications, reservations, reports, and more — instantly.
+            </p>
+            <button onclick="document.getElementById('demo-section').scrollIntoView({ behavior: 'smooth' })" 
+                    class="mt-12 bg-white text-black px-10 py-5 rounded-3xl text-lg font-medium hover:scale-105 transition-transform">
+                Try the Assistant →
+            </button>
+        </div>
+    </section>
 
-            <!-- Chat Window -->
-            <div id="chat-window" class="flex-1 overflow-auto p-8 space-y-8 bg-neutral-50">
-                <div class="max-w-2xl">
-                    <p class="text-4xl font-semibold tracking-tight">Hello! How can I help you today?</p>
-                    <p class="text-neutral-600 mt-4 text-lg">I can create welcome emails, manage reservations, generate reports, and handle guest requests.</p>
+    <!-- Features -->
+    <section id="features" class="section py-24 bg-neutral-900">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <h2 class="text-5xl font-semibold tracking-tighter text-center mb-16">Designed for real hotel operations.</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-neutral-800 rounded-3xl p-10">
+                    <i class="fa-solid fa-envelope text-4xl text-blue-400 mb-6"></i>
+                    <h3 class="text-2xl font-semibold mb-3">Instant Guest Emails</h3>
+                    <p class="text-neutral-400">Create personalized welcome emails, confirmations, and follow-ups in seconds.</p>
                 </div>
-            </div>
-
-            <!-- Input Area -->
-            <div class="p-8 bg-white border-t">
-                <div class="max-w-3xl mx-auto relative">
-                    <input id="user-input" type="text" 
-                           class="w-full bg-white border border-neutral-300 focus:border-black rounded-3xl px-8 py-7 text-lg outline-none transition-all"
-                           placeholder="Type here... (e.g. Create welcome email for Mr. Smith)">
-                    <button onclick="sendMessage()" 
-                            class="absolute right-4 top-1/2 -translate-y-1/2 bg-black text-white px-10 py-5 rounded-3xl hover:bg-neutral-800 transition-colors">
-                        Send
-                    </button>
+                <div class="bg-neutral-800 rounded-3xl p-10">
+                    <i class="fa-solid fa-calendar text-4xl text-emerald-400 mb-6"></i>
+                    <h3 class="text-2xl font-semibold mb-3">Smart Reservations</h3>
+                    <p class="text-neutral-400">Handle bookings, check availability, and generate confirmations automatically.</p>
+                </div>
+                <div class="bg-neutral-800 rounded-3xl p-10">
+                    <i class="fa-solid fa-file-lines text-4xl text-violet-400 mb-6"></i>
+                    <h3 class="text-2xl font-semibold mb-3">Reports & Files</h3>
+                    <p class="text-neutral-400">Generate daily reports, check-in logs, and operational documents on demand.</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Live Demo -->
+    <section id="demo-section" class="section py-20 bg-black">
+        <div class="max-w-screen-2xl mx-auto px-8">
+            <h2 class="text-5xl font-semibold tracking-tighter text-center mb-12">Talk to Your AI Assistant</h2>
+            
+            <!-- Chat Interface -->
+            <div class="max-w-4xl mx-auto bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-700">
+                <div class="p-4 border-b border-neutral-700 flex items-center justify-between bg-neutral-950">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-emerald-500 rounded-full"></div>
+                        <span class="font-medium">NovaMind Assistant</span>
+                    </div>
+                    <span class="text-xs text-neutral-400">Secure • Local AI</span>
+                </div>
+                
+                <div id="chat-window" class="h-96 overflow-auto p-8 space-y-6"></div>
+                
+                <div class="p-6 border-t border-neutral-700 bg-neutral-950">
+                    <div class="flex gap-3">
+                        <input id="user-input" type="text" 
+                               class="flex-1 bg-neutral-800 border border-neutral-700 rounded-3xl px-6 py-5 outline-none focus:border-white"
+                               placeholder="Create a welcome email for a VIP guest...">
+                        <button onclick="sendMessage()" 
+                                class="bg-white text-black px-10 rounded-3xl font-medium hover:bg-neutral-200">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-16 text-center text-neutral-500 text-sm">
+        <p>© 2026 NovaMind • Built for excellence in hospitality</p>
+    </footer>
 
     <script>
-        function sanitizeInput(str) {
-            return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        }
-
+        // Chat functionality
         function sendMessage() {
             const input = document.getElementById('user-input');
-            let message = input.value.trim();
-            if (!message) return;
+            const msg = input.value.trim();
+            if (!msg) return;
 
-            message = sanitizeInput(message);
-            addMessage(message, 'user');
+            addMessage(msg, true);
             input.value = '';
 
             setTimeout(() => {
-                const response = getAIResponse(message);
-                addMessage(response, 'ai');
-            }, 700);
+                let reply = "Understood. I've processed your request.";
+                if (msg.toLowerCase().includes("welcome") || msg.toLowerCase().includes("email")) {
+                    reply = "✅ Welcome email created for the guest.";
+                } else if (msg.toLowerCase().includes("reservation")) {
+                    reply = "📅 Reservation confirmed successfully.";
+                }
+                addMessage(reply, false);
+            }, 800);
         }
 
-        function addMessage(text, sender) {
+        function addMessage(text, isUser) {
             const chat = document.getElementById('chat-window');
-            const bubble = document.createElement('div');
-            
-            if (sender === 'user') {
-                bubble.className = 'flex justify-end';
-                bubble.innerHTML = `<div class="chat-bubble bg-black text-white px-6 py-4 rounded-3xl rounded-br-none">${text}</div>`;
-            } else {
-                bubble.className = 'flex justify-start';
-                bubble.innerHTML = `<div class="chat-bubble bg-white border border-neutral-200 px-6 py-4 rounded-3xl rounded-bl-none">${text}</div>`;
-            }
-            chat.appendChild(bubble);
+            const div = document.createElement('div');
+            div.className = isUser ? 'flex justify-end' : 'flex justify-start';
+            div.innerHTML = `
+                <div class="${isUser ? 'bg-white text-black' : 'bg-neutral-800 text-white'} px-6 py-4 rounded-3xl max-w-[80%]">
+                    ${text}
+                </div>
+            `;
+            chat.appendChild(div);
             chat.scrollTop = chat.scrollHeight;
         }
 
-        function getAIResponse(prompt) {
-            const lower = prompt.toLowerCase();
-            if (lower.includes("welcome") || lower.includes("email")) {
-                return `✅ Welcome email for the guest has been created successfully.`;
-            }
-            if (lower.includes("reservation") || lower.includes("booking")) {
-                return `📅 Reservation confirmed. Confirmation number: NM-${Math.floor(100000 + Math.random()*900000)}`;
-            }
-            if (lower.includes("report") || lower.includes("file")) {
-                return `📄 Report file created securely on your system.`;
-            }
-            return `✅ Request processed.<br><br>How else can I assist you at the front desk?`;
-        }
-
-        function newChat() {
-            if (confirm("Start a new conversation?")) {
-                document.getElementById('chat-window').innerHTML = `
-                    <div class="max-w-2xl">
-                        <p class="text-4xl font-semibold tracking-tight">Hello again!</p>
-                        <p class="text-neutral-600 mt-4 text-lg">How can I help you today?</p>
-                    </div>
-                `;
-            }
-        }
-
-        document.getElementById('user-input').addEventListener('keypress', e => {
-            if (e.key === 'Enter') sendMessage();
-        });
+        // Initialize with welcome message
+        window.onload = () => {
+            const chat = document.getElementById('chat-window');
+            chat.innerHTML = `<div class="text-neutral-400">Hello! I'm ready to help with front desk operations.</div>`;
+        };
     </script>
 </body>
 </html>
