@@ -22,7 +22,7 @@
     <nav class="nav fixed w-full z-50 border-b border-neutral-800">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <i class="fa-solid fa-brain text-3xl text-violet-400"></i>
+                <i class="fa-solid fa-camel text-3xl text-amber-400"></i>
                 <span class="text-3xl font-semibold tracking-tighter">OsamaAi</span>
             </div>
             <div class="text-emerald-400 text-sm font-medium flex items-center gap-2">
@@ -34,35 +34,28 @@
     <div class="pt-20 min-h-screen flex items-center bg-neutral-950">
         <div class="max-w-screen-2xl mx-auto px-8 w-full">
             <div class="max-w-4xl mx-auto">
-                <!-- Chat Container -->
                 <div class="bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-700 shadow-2xl">
-                    <!-- Chat Header -->
                     <div class="p-6 border-b border-neutral-700 flex items-center justify-between bg-neutral-950">
                         <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-2xl flex items-center justify-center">
-                                <i class="fa-solid fa-brain text-white"></i>
+                            <div class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center text-xl">
+                                🐪
                             </div>
                             <div>
                                 <div class="font-semibold text-xl">OsamaAi</div>
                                 <div class="text-xs text-emerald-400">Hyper Intelligent Assistant</div>
                             </div>
                         </div>
-                        <div class="text-neutral-400 text-sm">Always thinking...</div>
                     </div>
 
-                    <!-- Chat Messages -->
                     <div id="chat-window" class="h-[520px] p-8 overflow-auto space-y-6"></div>
 
-                    <!-- Input -->
                     <div class="p-6 border-t border-neutral-700 bg-neutral-950">
                         <div class="flex gap-3">
                             <input id="user-input" type="text" 
-                                   class="flex-1 bg-neutral-800 border border-neutral-700 focus:border-violet-500 rounded-3xl px-8 py-6 outline-none text-lg"
+                                   class="flex-1 bg-neutral-800 border border-neutral-700 rounded-3xl px-8 py-6 outline-none focus:border-amber-500 text-lg"
                                    placeholder="Ask me anything...">
                             <button onclick="sendMessage()" 
-                                    class="bg-white text-black px-10 rounded-3xl font-medium hover:bg-neutral-100 transition-colors">
-                                Send
-                            </button>
+                                    class="bg-white text-black px-10 rounded-3xl font-medium hover:bg-neutral-100">Send</button>
                         </div>
                     </div>
                 </div>
@@ -75,58 +68,41 @@
             const input = document.getElementById('user-input');
             const msg = input.value.trim();
             if (!msg) return;
-
+            
             addMessage(msg, true);
             input.value = '';
 
             setTimeout(() => {
-                const reply = getHyperIntelligentResponse(msg);
+                const reply = getSmartResponse(msg);
                 addMessage(reply, false);
-            }, 800);
+            }, 700);
         }
 
         function addMessage(text, isUser) {
             const chat = document.getElementById('chat-window');
             const div = document.createElement('div');
             div.className = isUser ? 'flex justify-end' : 'flex justify-start';
-            div.innerHTML = `
-                <div class="${isUser ? 'bg-white text-black' : 'bg-neutral-800'} px-6 py-4 rounded-3xl max-w-[80%]">
-                    ${text}
-                </div>`;
+            div.innerHTML = `<div class="${isUser ? 'bg-white text-black' : 'bg-neutral-800'} px-6 py-4 rounded-3xl">${text}</div>`;
             chat.appendChild(div);
             chat.scrollTop = chat.scrollHeight;
         }
 
-        // Hyper Intelligent AI
-        function getHyperIntelligentResponse(prompt) {
+        function getSmartResponse(prompt) {
             const lower = prompt.toLowerCase();
-
-            if (lower.includes("who are you") || lower.includes("what are you")) {
-                return "I am OsamaAi — a hyper-intelligent AI assistant built to think deeply, reason clearly, and help you with anything.";
-            }
-            if (lower.includes("what can you do") || lower.includes("capabilities")) {
-                return "I can write code, create business plans, analyze data, write emails, brainstorm ideas, help with research, generate stories, debug problems, and much more. Just ask.";
-            }
-            if (lower.includes("hello") || lower.includes("hi")) {
-                return "Hello! I'm ready. What would you like to create or solve today?";
-            }
-
-            // Default smart response
-            return `Understood. I've analyzed your request.<br><br>Here's my thoughtful response to: <strong>"${prompt}"</strong><br><br>How would you like me to expand on this?`;
+            if (lower.includes("who are you")) return "I am OsamaAi — a hyper-intelligent AI assistant.";
+            if (lower.includes("what can you do")) return "I can write code, create plans, analyze ideas, help with research, and much more. Just ask.";
+            return "Understood. How can I help you further?";
         }
 
-        // Initialize with welcome
         window.onload = () => {
             document.getElementById('chat-window').innerHTML = `
                 <div class="max-w-2xl">
                     <p class="text-4xl font-semibold tracking-tight">Hello, I'm OsamaAi.</p>
-                    <p class="text-neutral-400 mt-4 text-xl">A hyper-intelligent assistant ready to help you with anything.</p>
-                    <p class="text-neutral-400 mt-8">Try asking me: "What can you do?" or "Write a business plan"</p>
+                    <p class="text-neutral-400 mt-4">A hyper-intelligent assistant. What would you like to do today?</p>
                 </div>`;
         };
 
-        // Enter key support
-        document.getElementById('user-input').addEventListener('keypress', (e) => {
+        document.getElementById('user-input').addEventListener('keypress', e => {
             if (e.key === 'Enter') sendMessage();
         });
     </script>
