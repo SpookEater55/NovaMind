@@ -14,7 +14,6 @@
             color: #f5f5f7;
         }
         .nav { background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(30px); }
-        .dropdown:hover .dropdown-menu { display: block; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -30,41 +29,9 @@
                 
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium">
                     <a href="#demo" class="hover:text-white transition-colors">Assistant</a>
-                    
-                    <!-- Features Dropdown -->
-                    <div class="relative dropdown group">
-                        <button class="flex items-center gap-1 hover:text-white transition-colors">
-                            Features 
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </button>
-                        <div class="dropdown-menu hidden absolute top-full left-0 mt-2 bg-neutral-900 border border-neutral-700 rounded-3xl py-6 w-80 shadow-2xl">
-                            <div class="px-6 py-4 hover:bg-neutral-800 rounded-2xl mx-2">
-                                <div class="text-emerald-400 text-xl mb-1">✉️ Instant Emails</div>
-                                <p class="text-sm text-neutral-400">Generate perfect welcome emails, confirmations & replies in seconds.</p>
-                            </div>
-                            <div class="px-6 py-4 hover:bg-neutral-800 rounded-2xl mx-2">
-                                <div class="text-blue-400 text-xl mb-1">📅 Smart Reservations</div>
-                                <p class="text-sm text-neutral-400">Handle bookings, check availability, and confirm instantly.</p>
-                            </div>
-                            <div class="px-6 py-4 hover:bg-neutral-800 rounded-2xl mx-2">
-                                <div class="text-violet-400 text-xl mb-1">📊 Reports & Files</div>
-                                <p class="text-sm text-neutral-400">Auto-generate daily reports, logs, and documents.</p>
-                            </div>
-                            <div class="px-6 py-4 hover:bg-neutral-800 rounded-2xl mx-2">
-                                <div class="text-amber-400 text-xl mb-1">⚡ Guest Requests</div>
-                                <p class="text-sm text-neutral-400">Handle special requests, complaints, and upgrades with ease.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- My Journey Dropdown -->
-                    <div class="relative dropdown group">
-                        <button onclick="document.getElementById('story').scrollIntoView({ behavior: 'smooth' })" 
-                                class="flex items-center gap-1 hover:text-white transition-colors">
-                            My Journey 
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </button>
-                    </div>
+                    <a href="#features" class="hover:text-white transition-colors">Features</a>
+                    <a onclick="document.getElementById('story').scrollIntoView({ behavior: 'smooth' })" 
+                       class="hover:text-white transition-colors cursor-pointer">My Journey</a>
                 </div>
             </div>
             
@@ -76,7 +43,7 @@
 
     <div class="pt-20">
 
-        <!-- Assistant Demo -->
+        <!-- Assistant -->
         <section id="demo" class="min-h-screen flex items-center bg-neutral-950">
             <div class="max-w-screen-2xl mx-auto px-8 w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -89,8 +56,11 @@
                             <div id="chat-window" class="h-96 p-8 overflow-auto space-y-6"></div>
                             <div class="p-6 border-t border-neutral-700">
                                 <div class="flex gap-3">
-                                    <input id="user-input" type="text" class="flex-1 bg-neutral-800 border border-neutral-700 rounded-3xl px-6 py-5 outline-none focus:border-white text-lg" placeholder="Create welcome email...">
-                                    <button onclick="sendMessage()" class="bg-white text-black px-10 rounded-3xl font-medium">Send</button>
+                                    <input id="user-input" type="text" 
+                                           class="flex-1 bg-neutral-800 border border-neutral-700 rounded-3xl px-6 py-5 outline-none focus:border-white text-lg"
+                                           placeholder="e.g. Create welcome email for Mr. Johnson...">
+                                    <button onclick="sendMessage()" 
+                                            class="bg-white text-black px-10 rounded-3xl font-medium">Send</button>
                                 </div>
                             </div>
                         </div>
@@ -103,11 +73,10 @@
         <section id="story" class="py-24 bg-black">
             <div class="max-w-screen-2xl mx-auto px-8">
                 <h2 class="text-6xl font-semibold tracking-tighter text-center mb-16">My Journey</h2>
+                <!-- Your story here (same as before) -->
                 <div class="max-w-3xl mx-auto text-lg leading-relaxed text-neutral-300 space-y-8">
                     <p>In 2007, at just 13 years old, I discovered the magic of coding...</p>
-                    <!-- (same story as before) -->
-                    <p>After nearly two decades of continuous learning and creation, I founded NovaMind. I wanted to combine my love for elegant code with practical, real-world impact — starting with the hospitality industry.</p>
-                    <p class="text-neutral-400 italic pt-8">From a curious kid in 2007 to creating intelligent AI assistants today — the journey continues.</p>
+                    <p>The idea for NovaMind was born after I waited 45 minutes at a hotel front desk after a long trip. That frustration inspired me to build a smarter solution.</p>
                 </div>
             </div>
         </section>
@@ -122,16 +91,11 @@
             
             addMessage(msg, true);
             input.value = '';
-            
+
             setTimeout(() => {
-                let reply = "Understood. I've processed your request.";
-                if (msg.toLowerCase().includes("welcome") || msg.toLowerCase().includes("email")) {
-                    reply = "✅ Welcome email generated successfully.";
-                } else if (msg.toLowerCase().includes("reservation")) {
-                    reply = "📅 Reservation confirmed.";
-                }
+                const reply = getSmartResponse(msg);
                 addMessage(reply, false);
-            }, 800);
+            }, 700);
         }
 
         function addMessage(text, isUser) {
@@ -143,8 +107,36 @@
             chat.scrollTop = chat.scrollHeight;
         }
 
+        // Much smarter AI responses
+        function getSmartResponse(prompt) {
+            const lower = prompt.toLowerCase();
+
+            if (lower.includes("welcome") || lower.includes("email")) {
+                return `✅ **Welcome Email Created**<br><br><strong>Subject:</strong> Welcome to Our Hotel!<br><br>Dear Guest,<br>Thank you for choosing us. Your room is ready and we can't wait to make your stay memorable.`;
+            }
+            if (lower.includes("reservation") || lower.includes("booking")) {
+                return `📅 **Reservation Confirmed**<br><br>Confirmation ID: <strong>NM-${Math.floor(100000 + Math.random()*900000)}</strong><br>Date: Tomorrow<br>Guests: 2<br>Room: Deluxe King`;
+            }
+            if (lower.includes("report") || lower.includes("daily") || lower.includes("file")) {
+                return `📊 **Daily Report Generated**<br><br>I've created <strong>Front_Desk_Summary_${new Date().toISOString().slice(0,10)}.pdf</strong> with today's check-ins, check-outs, and occupancy.`;
+            }
+            if (lower.includes("late") || lower.includes("checkout")) {
+                return `⏰ Late checkout approved until 4 PM.<br>Guest has been notified.`;
+            }
+            if (lower.includes("thank") || lower.includes("review")) {
+                return `💌 Thank you email sent with review request.`;
+            }
+
+            return `✅ Got it! I've handled your request.<br><br>What else can I help you with at the front desk?`;
+        }
+
+        // Initialize
         window.onload = () => {
-            document.getElementById('chat-window').innerHTML = `<div class="text-neutral-400">Hello! I'm your Front Desk Assistant. How can I help you today?</div>`;
+            document.getElementById('chat-window').innerHTML = `
+                <div class="text-neutral-400">
+                    Hello! I'm your Front Desk Assistant.<br>
+                    Try asking me to create a welcome email or confirm a reservation.
+                </div>`;
         };
     </script>
 </body>
