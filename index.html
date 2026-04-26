@@ -18,32 +18,25 @@
 </head>
 <body class="min-h-screen">
 
-    <!-- Navigation -->
     <nav class="nav fixed w-full z-50 border-b border-neutral-800">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <i class="fa-solid fa-camel text-3xl text-amber-400"></i>
                 <span class="text-3xl font-semibold tracking-tighter">OsamaAi</span>
             </div>
-            <div class="text-emerald-400 text-sm font-medium flex items-center gap-2">
-                <i class="fa-solid fa-shield-halved"></i> Hyper Intelligent • Local
-            </div>
+            <div class="text-emerald-400 text-sm font-medium">Hyper Intelligent • Local</div>
         </div>
     </nav>
 
     <div class="pt-20 min-h-screen flex items-center bg-neutral-950">
         <div class="max-w-screen-2xl mx-auto px-8 w-full">
             <div class="max-w-4xl mx-auto">
-                <div class="bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-700 shadow-2xl">
-                    <div class="p-6 border-b border-neutral-700 flex items-center justify-between bg-neutral-950">
-                        <div class="flex items-center gap-4">
-                            <div class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center text-xl">
-                                🐪
-                            </div>
-                            <div>
-                                <div class="font-semibold text-xl">OsamaAi</div>
-                                <div class="text-xs text-emerald-400">Hyper Intelligent Assistant</div>
-                            </div>
+                <div class="bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-700">
+                    <div class="p-6 border-b border-neutral-700 flex items-center gap-4 bg-neutral-950">
+                        <div class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center text-2xl">🐪</div>
+                        <div>
+                            <div class="font-semibold text-xl">OsamaAi</div>
+                            <div class="text-xs text-emerald-400">Hyper Intelligent Assistant</div>
                         </div>
                     </div>
 
@@ -73,9 +66,9 @@
             input.value = '';
 
             setTimeout(() => {
-                const reply = getSmartResponse(msg);
+                const reply = getHyperIntelligentResponse(msg);
                 addMessage(reply, false);
-            }, 700);
+            }, 600);
         }
 
         function addMessage(text, isUser) {
@@ -87,18 +80,44 @@
             chat.scrollTop = chat.scrollHeight;
         }
 
-        function getSmartResponse(prompt) {
+        // Much smarter AI
+        function getHyperIntelligentResponse(prompt) {
             const lower = prompt.toLowerCase();
-            if (lower.includes("who are you")) return "I am OsamaAi — a hyper-intelligent AI assistant.";
-            if (lower.includes("what can you do")) return "I can write code, create plans, analyze ideas, help with research, and much more. Just ask.";
-            return "Understood. How can I help you further?";
+
+            if (lower.includes("who are you") || lower.includes("what are you")) {
+                return "I am OsamaAi — a hyper-intelligent AI assistant. I can reason, create, analyze, and help with almost anything.";
+            }
+
+            if (lower.includes("what can you do") || lower.includes("capabilities")) {
+                return "I can write code, create recipes, business plans, stories, analyze ideas, help with research, debug problems, generate emails, and much more. Just ask me anything.";
+            }
+
+            if (lower.includes("cookie") || lower.includes("recipe")) {
+                return `Here's a delicious chocolate chip cookie recipe:<br><br>
+                        <strong>Ingredients:</strong><br>
+                        • 2¼ cups all-purpose flour<br>
+                        • 1 tsp baking soda<br>
+                        • 1 cup butter, softened<br>
+                        • ¾ cup sugar + ¾ cup brown sugar<br>
+                        • 2 eggs<br>
+                        • 2 tsp vanilla<br>
+                        • 2 cups chocolate chips<br><br>
+                        Bake at 375°F for 9-11 minutes.`;
+            }
+
+            if (lower.includes("hello") || lower.includes("hi")) {
+                return "Hello! Great to see you. What would you like to create or solve today?";
+            }
+
+            // Default intelligent response
+            return `Interesting request. I've thought about it.<br><br><strong>Response to "${prompt}":</strong><br>I can help you with that. Would you like me to expand on this, make it more detailed, or do something specific with it?`;
         }
 
         window.onload = () => {
             document.getElementById('chat-window').innerHTML = `
                 <div class="max-w-2xl">
                     <p class="text-4xl font-semibold tracking-tight">Hello, I'm OsamaAi.</p>
-                    <p class="text-neutral-400 mt-4">A hyper-intelligent assistant. What would you like to do today?</p>
+                    <p class="text-neutral-400 mt-4">A truly hyper-intelligent assistant. Ask me anything.</p>
                 </div>`;
         };
 
