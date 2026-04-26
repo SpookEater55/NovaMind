@@ -24,7 +24,7 @@
                 <i class="fa-solid fa-camel text-3xl text-amber-400"></i>
                 <span class="text-3xl font-semibold tracking-tighter">OsamaAi</span>
             </div>
-            <div class="text-emerald-400 text-sm font-medium">Hyper Intelligent • Groq API</div>
+            <div class="text-emerald-400 text-sm font-medium" id="status">Connecting to Groq...</div>
         </div>
     </nav>
 
@@ -44,11 +44,8 @@
 
                     <div class="p-6 border-t border-neutral-700 bg-neutral-950">
                         <div class="flex gap-3">
-                            <input id="user-input" type="text" 
-                                   class="flex-1 bg-neutral-800 border border-neutral-700 rounded-3xl px-8 py-6 outline-none focus:border-amber-500 text-lg"
-                                   placeholder="Ask me anything...">
-                            <button onclick="sendMessage()" 
-                                    class="bg-white text-black px-10 rounded-3xl font-medium hover:bg-neutral-100">Send</button>
+                            <input id="user-input" type="text" class="flex-1 bg-neutral-800 border border-neutral-700 rounded-3xl px-8 py-6 outline-none focus:border-amber-500 text-lg" placeholder="Ask me anything...">
+                            <button onclick="sendMessage()" class="bg-white text-black px-10 rounded-3xl font-medium hover:bg-neutral-100">Send</button>
                         </div>
                     </div>
                 </div>
@@ -83,11 +80,13 @@
                     })
                 });
 
+                if (!res.ok) throw new Error("Invalid API key or rate limit");
+
                 const data = await res.json();
                 const reply = data.choices[0].message.content;
                 replaceLastMessage(reply);
             } catch (e) {
-                replaceLastMessage("Error connecting to Groq API. Please check your key or internet.");
+                replaceLastMessage("❌ Error: Could not connect to Groq.<br>Please check your API key or internet connection.");
             }
         }
 
