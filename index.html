@@ -3,74 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; font-src https://fonts.googleapis.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com;">
     <title>NovaMind • Front Desk Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap');
-        body { font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-        .apple-nav { background: rgba(255,255,255,0.97); backdrop-filter: blur(24px); }
+        body { 
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background: #f5f5f7;
+        }
         .chat-bubble { max-width: 75%; word-break: break-word; }
     </style>
 </head>
-<body class="bg-neutral-50 text-neutral-900">
+<body class="min-h-screen">
 
-    <!-- Secure Apple Top Nav -->
-    <nav class="apple-nav sticky top-0 z-50 border-b border-neutral-200 shadow-sm">
-        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="text-3xl font-semibold tracking-tight text-black">NovaMind</div>
-                <span class="text-xs bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-medium">SECURE • Llama 3.2</span>
-            </div>
-            <div class="text-xl font-medium text-neutral-700">Front Desk Assistant</div>
-            <div class="flex items-center gap-2 text-sm text-emerald-600">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>Local AI • Encrypted</span>
-            </div>
-        </div>
-    </nav>
-
-    <div class="max-w-screen-2xl mx-auto flex h-[calc(100vh-73px)]">
+    <div class="max-w-screen-2xl mx-auto flex h-screen">
+        
         <!-- Sidebar -->
-        <div class="w-80 border-r border-neutral-200 bg-white p-6">
-            <h2 class="font-semibold mb-6 flex items-center gap-2 text-lg">
-                <i class="fa-solid fa-concierge-bell text-emerald-600"></i> 
-                Front Desk Assistant
-            </h2>
-            <div onclick="newChat()" class="flex items-center gap-3 p-4 hover:bg-neutral-100 rounded-2xl cursor-pointer transition-colors">
-                <i class="fa-solid fa-plus"></i>
-                <span>New Conversation</span>
+        <div class="w-80 bg-white border-r border-neutral-200 p-8 flex flex-col">
+            <div class="flex items-center gap-3 mb-10">
+                <div class="w-9 h-9 bg-black rounded-2xl flex items-center justify-center text-white font-bold">N</div>
+                <div>
+                    <div class="font-semibold text-2xl tracking-tight">NovaMind</div>
+                    <div class="text-xs text-emerald-600 font-medium">Llama 3.2 • Secure</div>
+                </div>
+            </div>
+            
+            <h1 class="text-3xl font-semibold mb-2">Front Desk Assistant</h1>
+            <p class="text-neutral-500 mb-8">Your intelligent hotel operations helper</p>
+            
+            <div onclick="newChat()" class="flex items-center gap-3 p-4 hover:bg-neutral-100 rounded-3xl cursor-pointer transition-colors">
+                <i class="fa-solid fa-plus text-lg"></i>
+                <span class="font-medium">New Conversation</span>
             </div>
         </div>
 
-        <!-- Chat Area -->
+        <!-- Main Chat Area -->
         <div class="flex-1 flex flex-col">
-            <div id="chat-window" class="flex-1 overflow-auto p-8 space-y-8 bg-neutral-50">
-                <div class="max-w-2xl">
-                    <p class="text-3xl font-medium">Hello, I'm your Front Desk Assistant.</p>
-                    <p class="text-neutral-600 mt-3">I can help with guest communications, reservations, reports, and more — securely.</p>
+            <!-- Header -->
+            <div class="h-16 border-b bg-white flex items-center px-8">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-concierge-bell text-2xl text-emerald-600"></i>
+                    <div class="font-medium text-xl">Front Desk Assistant</div>
+                </div>
+                <div class="ml-auto text-sm text-emerald-600 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Local & Secure</span>
                 </div>
             </div>
 
-            <!-- Input -->
-            <div class="p-6 border-t bg-white">
+            <!-- Chat Window -->
+            <div id="chat-window" class="flex-1 overflow-auto p-8 space-y-8 bg-neutral-50">
+                <div class="max-w-2xl">
+                    <p class="text-4xl font-semibold tracking-tight">Hello! How can I help you today?</p>
+                    <p class="text-neutral-600 mt-4 text-lg">I can create welcome emails, manage reservations, generate reports, and handle guest requests.</p>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-8 bg-white border-t">
                 <div class="max-w-3xl mx-auto relative">
                     <input id="user-input" type="text" 
-                           class="w-full bg-white border border-neutral-300 focus:border-emerald-500 rounded-3xl px-8 py-6 text-lg outline-none transition-colors"
-                           placeholder="e.g. Create welcome email for guest arriving tomorrow">
+                           class="w-full bg-white border border-neutral-300 focus:border-black rounded-3xl px-8 py-7 text-lg outline-none transition-all"
+                           placeholder="Type here... (e.g. Create welcome email for Mr. Smith)">
                     <button onclick="sendMessage()" 
-                            class="absolute right-4 top-1/2 -translate-y-1/2 bg-black text-white px-8 py-4 rounded-3xl hover:bg-neutral-800 transition-colors">
+                            class="absolute right-4 top-1/2 -translate-y-1/2 bg-black text-white px-10 py-5 rounded-3xl hover:bg-neutral-800 transition-colors">
                         Send
                     </button>
                 </div>
-                <p class="text-center text-[10px] text-neutral-400 mt-3">All conversations are processed locally • Secure mode enabled</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Sanitize input to prevent XSS
         function sanitizeInput(str) {
             return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         }
@@ -81,14 +87,13 @@
             if (!message) return;
 
             message = sanitizeInput(message);
-            
             addMessage(message, 'user');
             input.value = '';
 
             setTimeout(() => {
                 const response = getAIResponse(message);
                 addMessage(response, 'ai');
-            }, 650);
+            }, 700);
         }
 
         function addMessage(text, sender) {
@@ -97,7 +102,7 @@
             
             if (sender === 'user') {
                 bubble.className = 'flex justify-end';
-                bubble.innerHTML = `<div class="chat-bubble bg-blue-600 text-white px-6 py-4 rounded-3xl rounded-br-none">${text}</div>`;
+                bubble.innerHTML = `<div class="chat-bubble bg-black text-white px-6 py-4 rounded-3xl rounded-br-none">${text}</div>`;
             } else {
                 bubble.className = 'flex justify-start';
                 bubble.innerHTML = `<div class="chat-bubble bg-white border border-neutral-200 px-6 py-4 rounded-3xl rounded-bl-none">${text}</div>`;
@@ -108,31 +113,29 @@
 
         function getAIResponse(prompt) {
             const lower = prompt.toLowerCase();
-            
             if (lower.includes("welcome") || lower.includes("email")) {
-                return `✅ <strong>Welcome Email Generated</strong><br><br>Subject: Welcome to Our Hotel!<br><br>Dear Guest,<br>Thank you for choosing us...`;
+                return `✅ Welcome email for the guest has been created successfully.`;
             }
             if (lower.includes("reservation") || lower.includes("booking")) {
-                return `📅 Reservation confirmed successfully.<br>Confirmation ID: <strong>NM-${Math.floor(100000 + Math.random()*900000)}</strong>`;
+                return `📅 Reservation confirmed. Confirmation number: NM-${Math.floor(100000 + Math.random()*900000)}`;
             }
             if (lower.includes("report") || lower.includes("file")) {
-                return `📄 File created securely: <strong>Front_Desk_Report_${new Date().toISOString().slice(0,10)}.md</strong>`;
+                return `📄 Report file created securely on your system.`;
             }
-            return `✅ Request processed securely.<br><br>How else can I assist you at the front desk?`;
+            return `✅ Request processed.<br><br>How else can I assist you at the front desk?`;
         }
 
         function newChat() {
-            if (confirm("Start a new secure conversation?")) {
+            if (confirm("Start a new conversation?")) {
                 document.getElementById('chat-window').innerHTML = `
                     <div class="max-w-2xl">
-                        <p class="text-3xl font-medium">Ready for a new session.</p>
-                        <p class="text-neutral-600 mt-3">How can I help you today?</p>
+                        <p class="text-4xl font-semibold tracking-tight">Hello again!</p>
+                        <p class="text-neutral-600 mt-4 text-lg">How can I help you today?</p>
                     </div>
                 `;
             }
         }
 
-        // Enter key support
         document.getElementById('user-input').addEventListener('keypress', e => {
             if (e.key === 'Enter') sendMessage();
         });
