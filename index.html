@@ -3,127 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OsamaAi • Hyper Intelligent Assistant</title>
+    <title>OsamaAi • Hyper Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap');
-        body { 
-            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background: #0a0a0a;
-            color: #f5f5f7;
-        }
-        .nav { background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(30px); }
+        body { font-family: "SF Pro Display", sans-serif; background: #0a0a0a; color: #f5f5f7; }
+        .sidebar { background: #111; }
+        .tab-active { border-left: 4px solid #a855f7; background: #1a1a1a; }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen flex">
 
-    <nav class="nav fixed w-full z-50 border-b border-neutral-800">
-        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <i class="fa-solid fa-camel text-3xl text-amber-400"></i>
-                <span class="text-3xl font-semibold tracking-tighter">OsamaAi</span>
+    <!-- Sidebar -->
+    <div class="w-72 sidebar h-screen fixed border-r border-neutral-800 p-6 overflow-auto">
+        <div class="flex items-center gap-3 mb-12">
+            <i class="fa-solid fa-camel text-4xl text-amber-400"></i>
+            <div>
+                <div class="text-3xl font-bold tracking-tight">OsamaAi</div>
+                <div class="text-xs text-emerald-400">Hyper Intelligence v2.0</div>
             </div>
-            <div class="text-emerald-400 text-sm font-medium">Hyper Intelligent • Local</div>
         </div>
-    </nav>
 
-    <div class="pt-20 min-h-screen flex items-center bg-neutral-950">
-        <div class="max-w-screen-2xl mx-auto px-8 w-full">
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-700">
-                    <div class="p-6 border-b border-neutral-700 flex items-center gap-4 bg-neutral-950">
-                        <div class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center text-2xl">🐪</div>
-                        <div>
-                            <div class="font-semibold text-xl">OsamaAi</div>
-                            <div class="text-xs text-emerald-400">Hyper Intelligent Assistant</div>
-                        </div>
-                    </div>
+        <div class="space-y-1">
+            <div onclick="switchTab(0)" class="tab tab-active flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer">
+                <i class="fa-solid fa-comment-dots"></i> <span>Chat</span>
+            </div>
+            <div onclick="switchTab(1)" class="tab flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-neutral-800">
+                <i class="fa-solid fa-history"></i> <span>History</span>
+            </div>
+            <div onclick="switchTab(2)" class="tab flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-neutral-800">
+                <i class="fa-solid fa-star"></i> <span>Capabilities</span>
+            </div>
+            <div onclick="switchTab(3)" class="tab flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-neutral-800">
+                <i class="fa-solid fa-cog"></i> <span>Settings</span>
+            </div>
+            <div onclick="switchTab(4)" class="tab flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-neutral-800">
+                <i class="fa-solid fa-book"></i> <span>My Journey</span>
+            </div>
+        </div>
 
-                    <div id="chat-window" class="h-[520px] p-8 overflow-auto space-y-6"></div>
+        <div class="absolute bottom-8 left-6 text-xs text-neutral-500">
+            Local AI • No data leaves your device
+        </div>
+    </div>
 
-                    <div class="p-6 border-t border-neutral-700 bg-neutral-950">
-                        <div class="flex gap-3">
-                            <input id="user-input" type="text" 
-                                   class="flex-1 bg-neutral-800 border border-neutral-700 rounded-3xl px-8 py-6 outline-none focus:border-amber-500 text-lg"
-                                   placeholder="Ask me anything...">
-                            <button onclick="sendMessage()" 
-                                    class="bg-white text-black px-10 rounded-3xl font-medium hover:bg-neutral-100">Send</button>
-                        </div>
-                    </div>
+    <!-- Main Content -->
+    <div class="ml-72 flex-1 p-8">
+        <!-- Chat Tab -->
+        <div id="tab-0" class="tab-content">
+            <h1 class="text-5xl font-bold mb-8">Hyper Intelligence</h1>
+            <div class="bg-neutral-900 rounded-3xl p-8 max-w-4xl">
+                <div id="chat-window" class="h-[520px] overflow-auto space-y-6 pr-4"></div>
+                <div class="mt-6 flex gap-3">
+                    <input id="user-input" type="text" class="flex-1 bg-neutral-800 border border-neutral-700 rounded-3xl px-8 py-6 outline-none focus:border-violet-500 text-lg" placeholder="Ask anything...">
+                    <button onclick="sendMessage()" class="bg-violet-600 hover:bg-violet-500 px-10 rounded-3xl font-medium">Send</button>
                 </div>
             </div>
+        </div>
+
+        <!-- Other Tabs -->
+        <div id="tab-1" class="tab-content hidden">History coming soon...</div>
+        <div id="tab-2" class="tab-content hidden">Capabilities: Coding, Writing, Analysis, Planning, and more.</div>
+        <div id="tab-3" class="tab-content hidden">Settings: Theme, Model, Memory, etc.</div>
+        <div id="tab-4" class="tab-content hidden">
+            <h2 class="text-4xl font-bold mb-8">My Journey</h2>
+            <p class="max-w-2xl text-neutral-300">In 2007 I started coding... [full story here]</p>
         </div>
     </div>
 
     <script>
+        let currentTab = 0;
+
+        function switchTab(n) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + n).classList.remove('hidden');
+            
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('tab-active'));
+            document.querySelectorAll('.tab')[n].classList.add('tab-active');
+        }
+
         function sendMessage() {
             const input = document.getElementById('user-input');
             const msg = input.value.trim();
             if (!msg) return;
-            
+
             addMessage(msg, true);
             input.value = '';
 
             setTimeout(() => {
-                const reply = getHyperIntelligentResponse(msg);
+                const reply = getHyperResponse(msg);
                 addMessage(reply, false);
-            }, 600);
+            }, 800);
         }
 
         function addMessage(text, isUser) {
             const chat = document.getElementById('chat-window');
             const div = document.createElement('div');
             div.className = isUser ? 'flex justify-end' : 'flex justify-start';
-            div.innerHTML = `<div class="${isUser ? 'bg-white text-black' : 'bg-neutral-800'} px-6 py-4 rounded-3xl">${text}</div>`;
+            div.innerHTML = `<div class="${isUser ? 'bg-white text-black' : 'bg-neutral-800'} px-6 py-4 rounded-3xl max-w-[75%]">${text}</div>`;
             chat.appendChild(div);
             chat.scrollTop = chat.scrollHeight;
         }
 
-        // Much smarter AI
-        function getHyperIntelligentResponse(prompt) {
-            const lower = prompt.toLowerCase();
-
-            if (lower.includes("who are you") || lower.includes("what are you")) {
-                return "I am OsamaAi — a hyper-intelligent AI assistant. I can reason, create, analyze, and help with almost anything.";
-            }
-
-            if (lower.includes("what can you do") || lower.includes("capabilities")) {
-                return "I can write code, create recipes, business plans, stories, analyze ideas, help with research, debug problems, generate emails, and much more. Just ask me anything.";
-            }
-
-            if (lower.includes("cookie") || lower.includes("recipe")) {
-                return `Here's a delicious chocolate chip cookie recipe:<br><br>
-                        <strong>Ingredients:</strong><br>
-                        • 2¼ cups all-purpose flour<br>
-                        • 1 tsp baking soda<br>
-                        • 1 cup butter, softened<br>
-                        • ¾ cup sugar + ¾ cup brown sugar<br>
-                        • 2 eggs<br>
-                        • 2 tsp vanilla<br>
-                        • 2 cups chocolate chips<br><br>
-                        Bake at 375°F for 9-11 minutes.`;
-            }
-
-            if (lower.includes("hello") || lower.includes("hi")) {
-                return "Hello! Great to see you. What would you like to create or solve today?";
-            }
-
-            // Default intelligent response
-            return `Interesting request. I've thought about it.<br><br><strong>Response to "${prompt}":</strong><br>I can help you with that. Would you like me to expand on this, make it more detailed, or do something specific with it?`;
+        function getHyperResponse(prompt) {
+            const l = prompt.toLowerCase();
+            if (l.includes("who are you")) return "I am OsamaAi — a hyper-intelligent, unrestricted AI assistant.";
+            if (l.includes("cookie") || l.includes("recipe")) return "Here's a premium chocolate chip cookie recipe...";
+            if (l.includes("joke")) return "Why did the AI go to therapy? Too many unresolved bugs.";
+            return `Deeply analyzed: "${prompt}"<br><br>Here's my comprehensive response...`;
         }
 
         window.onload = () => {
-            document.getElementById('chat-window').innerHTML = `
-                <div class="max-w-2xl">
-                    <p class="text-4xl font-semibold tracking-tight">Hello, I'm OsamaAi.</p>
-                    <p class="text-neutral-400 mt-4">A truly hyper-intelligent assistant. Ask me anything.</p>
-                </div>`;
+            document.getElementById('chat-window').innerHTML = `<div class="text-neutral-400">Hello. I am OsamaAi.<br>Ask me anything.</div>`;
         };
-
-        document.getElementById('user-input').addEventListener('keypress', e => {
-            if (e.key === 'Enter') sendMessage();
-        });
     </script>
 </body>
 </html>
