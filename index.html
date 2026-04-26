@@ -30,7 +30,8 @@
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium">
                     <a href="#demo" class="hover:text-white transition-colors">Assistant</a>
                     <a href="#features" class="hover:text-white transition-colors">Features</a>
-                    <a onclick="document.getElementById('story').scrollIntoView({ behavior: 'smooth' })" class="hover:text-white transition-colors cursor-pointer">My Journey</a>
+                    <a onclick="document.getElementById('story').scrollIntoView({ behavior: 'smooth' })" 
+                       class="hover:text-white transition-colors cursor-pointer">My Journey</a>
                 </div>
             </div>
             
@@ -42,24 +43,24 @@
 
     <div class="pt-20">
 
-        <!-- Hero / Assistant -->
+        <!-- Assistant Demo -->
         <section id="demo" class="min-h-screen flex items-center bg-neutral-950">
             <div class="max-w-screen-2xl mx-auto px-8 w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     <div class="lg:col-span-3">
-                        <h1 class="text-6xl font-semibold tracking-tighter">Front Desk Assistant</h1>
-                        <p class="text-neutral-400 mt-6 text-xl">Your always-available AI team member for hospitality.</p>
+                        <h1 class="text-5xl font-semibold tracking-tighter">Front Desk Assistant</h1>
+                        <p class="text-neutral-400 mt-4">Your intelligent AI companion for hospitality operations.</p>
                     </div>
                     <div class="lg:col-span-9">
-                        <div class="bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-700 shadow-2xl">
-                            <div id="chat-window" class="h-[520px] p-8 overflow-auto space-y-6"></div>
-                            <div class="p-6 border-t border-neutral-700 bg-neutral-950">
+                        <div class="bg-neutral-900 rounded-3xl overflow-hidden border border-neutral-700">
+                            <div id="chat-window" class="h-96 p-8 overflow-auto space-y-6"></div>
+                            <div class="p-6 border-t border-neutral-700">
                                 <div class="flex gap-3">
                                     <input id="user-input" type="text" 
                                            class="flex-1 bg-neutral-800 border border-neutral-700 rounded-3xl px-6 py-5 outline-none focus:border-white text-lg"
-                                           placeholder="Ask me anything... (e.g. Create welcome email)">
+                                           placeholder="e.g. Create welcome email for Mr. Johnson...">
                                     <button onclick="sendMessage()" 
-                                            class="bg-white text-black px-10 rounded-3xl font-medium hover:bg-neutral-100">Send</button>
+                                            class="bg-white text-black px-10 rounded-3xl font-medium">Send</button>
                                 </div>
                             </div>
                         </div>
@@ -68,28 +69,21 @@
             </div>
         </section>
 
-        <!-- Features -->
-        <section id="features" class="py-24 bg-black">
-            <div class="max-w-screen-2xl mx-auto px-8">
-                <h2 class="text-5xl font-semibold tracking-tighter text-center mb-16">Powerful Features</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Many feature cards... -->
-                    <div class="bg-neutral-900 p-8 rounded-3xl">
-                        <h3 class="text-2xl font-semibold mb-3">Instant Guest Emails</h3>
-                        <p class="text-neutral-400">Generate personalized welcome emails, confirmations, and thank you notes in seconds.</p>
-                    </div>
-                    <!-- Add more cards as needed -->
-                </div>
-            </div>
-        </section>
-
         <!-- My Journey -->
-        <section id="story" class="py-24 bg-neutral-950">
+        <section id="story" class="py-24 bg-black">
             <div class="max-w-screen-2xl mx-auto px-8">
                 <h2 class="text-6xl font-semibold tracking-tighter text-center mb-16">My Journey</h2>
+                
                 <div class="max-w-3xl mx-auto text-lg leading-relaxed text-neutral-300 space-y-8">
-                    <p>In 2007, at just 13 years old, I discovered the magic of coding...</p>
-                    <!-- Your full story here -->
+                    <p>In 2007, at just 13 years old, I fell in love with coding. While most kids were playing outside, I was teaching myself HTML, CSS, and JavaScript on an old family computer. That spark never left me.</p>
+                    
+                    <p>Over the next 18+ years, I built many projects and became an early developer on <strong>Picoin</strong>, gaining real-world experience in building scalable systems during the early days of cryptocurrency.</p>
+                    
+                    <p>The idea for NovaMind was born from a frustrating personal experience. After a long trip, I arrived at a hotel exhausted, only to wait nearly 45 minutes at the front desk because the staff was overwhelmed. As I stood there, I thought: “There has to be a better way.”</p>
+                    
+                    <p>That moment became the foundation. I decided to use my nearly two decades of coding experience to build an intelligent AI assistant that could instantly handle guest communications, reservations, welcome messages, and routine tasks — dramatically reducing wait times and improving service for everyone.</p>
+                    
+                    <p class="text-neutral-400 italic pt-8">NovaMind exists because I experienced the pain of slow service firsthand — and decided to build the solution so no one else has to wait like I did.</p>
                 </div>
             </div>
         </section>
@@ -97,27 +91,64 @@
     </div>
 
     <script>
-        // Enhanced AI
-        function getSmartResponse(prompt) {
-            const lower = prompt.toLowerCase();
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const msg = input.value.trim();
+            if (!msg) return;
             
-            if (lower.includes("what can you do") || lower.includes("capabilities")) {
-                return `I can do a lot! Here are some things I can help with:<br><br>
-                        • Create welcome emails<br>
-                        • Confirm reservations<br>
-                        • Generate daily reports<br>
-                        • Handle special requests<br>
-                        • Send thank you messages<br><br>What would you like me to do?`;
-            }
-            
-            if (lower.includes("welcome") || lower.includes("email")) {
-                return `✅ **Welcome Email Created**<br><br>Subject: Welcome to Our Hotel!<br><br>Dear Guest, Thank you for choosing us...`;
-            }
-            
-            return `✅ I've handled your request.<br><br>What else can I help you with?`;
+            addMessage(msg, true);
+            input.value = '';
+
+            setTimeout(() => {
+                const reply = getSmartResponse(msg);
+                addMessage(reply, false);
+            }, 700);
         }
 
-        // Rest of chat functions...
+        function addMessage(text, isUser) {
+            const chat = document.getElementById('chat-window');
+            const div = document.createElement('div');
+            div.className = isUser ? 'flex justify-end' : 'flex justify-start';
+            div.innerHTML = `<div class="${isUser ? 'bg-white text-black' : 'bg-neutral-800'} px-6 py-4 rounded-3xl">${text}</div>`;
+            chat.appendChild(div);
+            chat.scrollTop = chat.scrollHeight;
+        }
+
+        function getSmartResponse(prompt) {
+            const lower = prompt.toLowerCase();
+
+            if (lower.includes("what can you do") || lower.includes("help with") || lower.includes("capabilities")) {
+                return `I can help with many front desk tasks:<br><br>
+                        • Create personalized welcome emails<br>
+                        • Confirm and manage reservations<br>
+                        • Generate daily reports and files<br>
+                        • Handle special guest requests<br>
+                        • Send thank you and review messages<br><br>
+                        Just tell me what you need!`;
+            }
+
+            if (lower.includes("welcome") || lower.includes("email")) {
+                return `✅ **Welcome Email Created**<br><br><strong>Subject:</strong> Welcome to Our Hotel!<br><br>Dear Guest,<br>Thank you for choosing us. Your room is ready...`;
+            }
+
+            if (lower.includes("reservation") || lower.includes("booking")) {
+                return `📅 **Reservation Confirmed**<br><br>Confirmation ID: <strong>NM-${Math.floor(100000 + Math.random()*900000)}</strong>`;
+            }
+
+            if (lower.includes("report") || lower.includes("file")) {
+                return `📊 **Report Generated**<br><br>I've created today's front desk summary file.`;
+            }
+
+            return `✅ Got it! I've handled your request.<br><br>What else can I help you with at the front desk?`;
+        }
+
+        window.onload = () => {
+            document.getElementById('chat-window').innerHTML = `
+                <div class="text-neutral-400">
+                    Hello! I'm your Front Desk Assistant.<br>
+                    Try asking: "What can you do?" or "Create a welcome email"
+                </div>`;
+        };
     </script>
 </body>
 </html>
