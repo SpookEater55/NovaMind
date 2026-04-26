@@ -68,7 +68,7 @@
             setTimeout(() => {
                 const reply = getHyperResponse(msg);
                 addMessage(reply, false);
-            }, 650);
+            }, 600);
         }
 
         function addMessage(text, isUser) {
@@ -80,46 +80,48 @@
             chat.scrollTop = chat.scrollHeight;
         }
 
-        // Significantly smarter AI
+        // Much smarter AI
         function getHyperResponse(prompt) {
             const lower = prompt.toLowerCase();
 
+            if (lower.includes("hello") || lower.includes("hi")) {
+                return "Hello! Great to see you. What can I help you with today?";
+            }
+
             if (lower.includes("who are you") || lower.includes("what are you")) {
-                return "I am OsamaAi — a hyper-intelligent AI assistant with advanced reasoning capabilities. I'm designed to think deeply, be helpful, and provide high-quality responses.";
+                return "I am OsamaAi — a hyper-intelligent AI assistant with advanced reasoning. I'm here to help you with anything.";
             }
 
             if (lower.includes("what can you do") || lower.includes("capabilities")) {
-                return "I can help you with almost anything: writing code, creating recipes, business plans, stories, analyzing problems, researching topics, giving advice, generating ideas, and much more. Just ask me anything — I'm here to help.";
+                return "I can write code, create recipes, business plans, stories, analyze problems, give advice, generate ideas, debug issues, and much more. Just ask me anything — I'm ready.";
             }
 
             if (lower.includes("cookie") || lower.includes("recipe")) {
-                return `Here's a detailed, delicious **Chocolate Chip Cookie Recipe**:<br><br>
-                        <strong>Ingredients (24 cookies):</strong><br>
-                        • 2¼ cups all-purpose flour<br>
+                return `Here's a great **Chocolate Chip Cookie Recipe**:<br><br>
+                        <strong>Ingredients:</strong><br>
+                        • 2¼ cups flour<br>
                         • 1 tsp baking soda<br>
-                        • 1 tsp salt<br>
-                        • 1 cup unsalted butter, softened<br>
-                        • ¾ cup granulated sugar<br>
-                        • ¾ cup packed brown sugar<br>
-                        • 2 large eggs<br>
-                        • 2 tsp vanilla extract<br>
-                        • 2 cups semi-sweet chocolate chips<br><br>
-                        Bake at 375°F (190°C) for 9–11 minutes until golden.<br><br>Would you like a vegan version, gluten-free, or any customizations?`;
+                        • 1 cup butter<br>
+                        • ¾ cup sugar + ¾ cup brown sugar<br>
+                        • 2 eggs<br>
+                        • 2 tsp vanilla<br>
+                        • 2 cups chocolate chips<br><br>
+                        Bake at 375°F for 9-11 minutes.<br><br>Want any modifications?`;
             }
 
-            if (lower.includes("hello") || lower.includes("hi")) {
-                return "Hello! I'm OsamaAi. It's great to meet you. What would you like to work on today?";
+            if (lower.includes("tuna") || lower.includes("can")) {
+                return "Step 1: Find a can opener.<br>Step 2: Place it on the rim and twist.<br>Step 3: Enjoy your tuna.<br><br>Need a tuna salad recipe?";
             }
 
             // Default high-quality response
-            return `I've thought about your request: "<strong>${prompt}</strong>"<br><br>Here's my detailed take:<br><br>I understand what you're looking for. Let me know if you'd like me to expand on this, make it more specific, or approach it from a different angle.`;
+            return `Got it. I've processed "<strong>${prompt}</strong>".<br><br>What would you like me to do with this? Expand on it, give examples, or take a different direction?`;
         }
 
         window.onload = () => {
             document.getElementById('chat-window').innerHTML = `
                 <div class="max-w-2xl">
                     <p class="text-4xl font-semibold tracking-tight">Hello, I'm OsamaAi.</p>
-                    <p class="text-neutral-400 mt-4">A hyper-intelligent assistant. Ask me anything.</p>
+                    <p class="text-neutral-400 mt-4">A truly hyper-intelligent assistant. Ask me anything.</p>
                 </div>`;
         };
 
