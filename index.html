@@ -19,7 +19,7 @@
 </head>
 <body class="min-h-screen">
 
-    <!-- Apple-style Navigation with Dropdown -->
+    <!-- Navigation -->
     <nav class="nav fixed w-full z-50 border-b border-neutral-800">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
             <div class="flex items-center gap-8">
@@ -29,14 +29,15 @@
                     <a href="#demo" class="hover:text-white transition-colors">Assistant</a>
                     <a href="#features" class="hover:text-white transition-colors">Features</a>
                     
-                    <!-- Dropdown Tab -->
+                    <!-- Dropdown -->
                     <div class="relative dropdown group">
                         <button class="flex items-center gap-1 hover:text-white transition-colors">
-                            My Story 
+                            My Journey 
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </button>
                         <div class="dropdown-menu hidden absolute top-full left-0 mt-2 bg-neutral-900 border border-neutral-700 rounded-3xl py-4 w-64 shadow-2xl">
-                            <a href="#story" class="block px-6 py-3 hover:bg-neutral-800">My Journey</a>
+                            <a href="#story" onclick="document.getElementById('story').scrollIntoView({ behavior: 'smooth' })" 
+                               class="block px-6 py-3 hover:bg-neutral-800">My Full Story</a>
                         </div>
                     </div>
                 </div>
@@ -73,21 +74,23 @@
             </div>
         </section>
 
-        <!-- My Story -->
+        <!-- My Journey Section -->
         <section id="story" class="py-24 bg-black">
             <div class="max-w-screen-2xl mx-auto px-8">
-                <h2 class="text-6xl font-semibold tracking-tighter text-center mb-16">My Story</h2>
+                <h2 class="text-6xl font-semibold tracking-tighter text-center mb-16">My Journey</h2>
                 
                 <div class="max-w-3xl mx-auto text-lg leading-relaxed text-neutral-300 space-y-8">
-                    <p>In 2007, at just 13 years old, I fell in love with coding. While most kids were outside playing, I was in front of an old computer teaching myself HTML, CSS, and JavaScript. That spark never left me.</p>
+                    <p>In 2007, at just 13 years old, I discovered the magic of coding. While most kids were playing outside, I was teaching myself HTML, CSS, and JavaScript on an old family computer. That moment changed everything.</p>
                     
-                    <p>What started as a hobby quickly became a lifelong passion. Over the years I built dozens of projects, learned countless languages and frameworks, and pushed myself through many late nights of debugging and learning.</p>
+                    <p>What began as curiosity quickly turned into a deep passion. Over the next 18+ years, I immersed myself in technology — building websites, tools, automation systems, and experimental projects across many languages and platforms.</p>
                     
-                    <p>One of the highlights of my journey was becoming an early developer on <strong>Picoin</strong> — a project that gave me invaluable experience in building real systems under pressure during the early days of crypto.</p>
+                    <p>One of the most exciting milestones was becoming an early developer on <strong>Picoin</strong>. Working on a real crypto project in its early days taught me how to build under pressure, ship quickly, and think about systems that can scale globally.</p>
                     
-                    <p>After nearly two decades of continuous learning and building, I created NovaMind. I wanted to combine my love for elegant code with practical, real-world impact — starting with the hospitality industry.</p>
+                    <p>Those years of relentless learning, countless late nights, and continuous creation led me to found NovaMind. I wanted to create something meaningful — combining elegant code with real-world usefulness, starting with the hospitality industry.</p>
                     
-                    <p class="text-neutral-400 italic pt-8">From a curious 13-year-old in 2007 to building AI assistants today — the journey continues.</p>
+                    <p>Every feature, every line of code, and every interaction in NovaMind carries the experience of nearly two decades of dedication to building better tools.</p>
+                    
+                    <p class="text-neutral-400 italic pt-8 border-t border-neutral-800">From a curious kid in 2007 to creating intelligent AI assistants today — the journey is still going strong.</p>
                 </div>
             </div>
         </section>
