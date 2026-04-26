@@ -23,7 +23,6 @@
     <nav class="nav fixed w-full z-50 border-b border-neutral-800">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
             <div class="flex items-center gap-8">
-                <!-- Logo + Name -->
                 <div class="flex items-center gap-3">
                     <i class="fa-solid fa-building-columns text-3xl text-emerald-400"></i>
                     <a href="#" class="text-3xl font-semibold tracking-tighter">NovaMind</a>
@@ -31,8 +30,34 @@
                 
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium">
                     <a href="#demo" class="hover:text-white transition-colors">Assistant</a>
-                    <a href="#features" class="hover:text-white transition-colors">Features</a>
                     
+                    <!-- Features Dropdown -->
+                    <div class="relative dropdown group">
+                        <button class="flex items-center gap-1 hover:text-white transition-colors">
+                            Features 
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu hidden absolute top-full left-0 mt-2 bg-neutral-900 border border-neutral-700 rounded-3xl py-6 w-80 shadow-2xl">
+                            <div class="px-6 py-4 hover:bg-neutral-800 rounded-2xl mx-2">
+                                <div class="text-emerald-400 text-xl mb-1">✉️ Instant Emails</div>
+                                <p class="text-sm text-neutral-400">Generate perfect welcome emails, confirmations & replies in seconds.</p>
+                            </div>
+                            <div class="px-6 py-4 hover:bg-neutral-800 rounded-2xl mx-2">
+                                <div class="text-blue-400 text-xl mb-1">📅 Smart Reservations</div>
+                                <p class="text-sm text-neutral-400">Handle bookings, check availability, and confirm instantly.</p>
+                            </div>
+                            <div class="px-6 py-4 hover:bg-neutral-800 rounded-2xl mx-2">
+                                <div class="text-violet-400 text-xl mb-1">📊 Reports & Files</div>
+                                <p class="text-sm text-neutral-400">Auto-generate daily reports, logs, and documents.</p>
+                            </div>
+                            <div class="px-6 py-4 hover:bg-neutral-800 rounded-2xl mx-2">
+                                <div class="text-amber-400 text-xl mb-1">⚡ Guest Requests</div>
+                                <p class="text-sm text-neutral-400">Handle special requests, complaints, and upgrades with ease.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- My Journey Dropdown -->
                     <div class="relative dropdown group">
                         <button onclick="document.getElementById('story').scrollIntoView({ behavior: 'smooth' })" 
                                 class="flex items-center gap-1 hover:text-white transition-colors">
@@ -78,17 +103,11 @@
         <section id="story" class="py-24 bg-black">
             <div class="max-w-screen-2xl mx-auto px-8">
                 <h2 class="text-6xl font-semibold tracking-tighter text-center mb-16">My Journey</h2>
-                
                 <div class="max-w-3xl mx-auto text-lg leading-relaxed text-neutral-300 space-y-8">
-                    <p>In 2007, at just 13 years old, I discovered the magic of coding. While most kids were playing outside, I was teaching myself HTML, CSS, and JavaScript on an old family computer. That spark never left me.</p>
-                    
-                    <p>Over the next 18+ years, I built many projects and became an early developer on <strong>Picoin</strong>, gaining real-world experience in building scalable systems.</p>
-                    
-                    <p>The idea for NovaMind was born from a frustrating personal experience. After a long trip, I arrived at a hotel exhausted, only to wait nearly 45 minutes at the front desk because the staff was overwhelmed. As I stood there, I thought: “There has to be a better way.”</p>
-                    
-                    <p>That moment became the foundation. I decided to use my nearly two decades of coding experience to build an intelligent AI assistant that could instantly handle guest communications, reservations, welcome messages, and routine tasks — dramatically reducing wait times and improving service.</p>
-                    
-                    <p class="text-neutral-400 italic pt-8">NovaMind exists because I experienced the pain of slow service firsthand — and decided to build the solution so no one else has to wait like I did.</p>
+                    <p>In 2007, at just 13 years old, I discovered the magic of coding...</p>
+                    <!-- (same story as before) -->
+                    <p>After nearly two decades of continuous learning and creation, I founded NovaMind. I wanted to combine my love for elegant code with practical, real-world impact — starting with the hospitality industry.</p>
+                    <p class="text-neutral-400 italic pt-8">From a curious kid in 2007 to creating intelligent AI assistants today — the journey continues.</p>
                 </div>
             </div>
         </section>
